@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义checkbox， radio样式</title>
+    <style type="text/css">
+        .radio input {
+            display: none;
+        }
+
+        .radio span.icon {
+            display: inline-block;
+            width: 21px;
+            height: 21px;
+            vertical-align: bottom;
+            background: url("imgs/sprite.png") 79px 43px;
+        }
+
+        .radio input:checked + span.icon {
+            background: url("imgs/sprite.png") 44px -7px;
+        }
+
+        .checkbox input {
+            display: none;
+        }
+
+        .checkbox span.icon {
+            display: inline-block;
+            width: 21px;
+            height: 21px;
+            vertical-align: bottom;
+            background: url("imgs/sprite.png") 79px 22px;
+        }
+
+        .checkbox input:checked + span.icon {
+            background: url("imgs/sprite.png") 44px 22px;
+        }
+
+        .radio2 input {
+            display: none;
+        }
+
+        .radio2 input + span.icon {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin: 0 3px;
+            border: 1px solid #CCC;
+            border-radius: 50%;
+            line-height: 14px;
+            font-size: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .radio2 input:checked + span.icon {
+            border-color: red;
+        }
+
+        .radio2 input:checked + span.icon:after {
+            display: inline-block;
+            content: "";
+            width: 0;
+            height: 0;
+            border: 3px solid red;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .checkbox2 input {
+            display: none;
+        }
+
+        .checkbox2 input + span.icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 3px;
+            border: 1px solid #CCC;
+            overflow: hidden;
+            text-align: center;
+            line-height: 12px;
+            font-size: 0;
+        }
+
+        .checkbox2 input:checked + span.icon {
+            border-color: red;
+        }
+
+        .checkbox2 input:checked + span.icon:after {
+            display: inline-block;
+            width: 3px;
+            height: 5px;
+            border: 2px solid red;
+            border-left-width: 0;
+            border-top-width: 0;
+            content: "";
+            transform: rotate(45deg);
+            vertical-align: -3px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <label class="radio">
+        <span class="title"></span>
+        <input type="radio">
+        <span class="icon"></span>
+    </label>
+
+    <label class="checkbox">
+        <span class="title"></span>
+        <input type="checkbox">
+        <span class="icon"></span>
+    </label>
+</div>
+
+<div>
+    <label class="radio2">
+        <span class="title"></span>
+        <input type="radio">
+        <span class="icon"></span>
+    </label>
+
+    <label class="checkbox2">
+        <span class="title"></span>
+        <input type="checkbox">
+        <span class="icon"></span>
+    </label>
+</div>
+</body>
+</html>
