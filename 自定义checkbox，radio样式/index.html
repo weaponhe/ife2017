@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>自定义checkbox， radio样式</title>
     <style type="text/css">
-        .radio input {
+        .radio1 input {
             display: none;
         }
 
-        .radio span.icon {
+        .radio1 span.icon {
             display: inline-block;
             width: 21px;
             height: 21px;
@@ -16,15 +16,15 @@
             background: url("imgs/sprite.png") 79px 43px;
         }
 
-        .radio input:checked + span.icon {
+        .radio1 input:checked + span.icon {
             background: url("imgs/sprite.png") 44px -7px;
         }
 
-        .checkbox input {
+        .checkbox1 input {
             display: none;
         }
 
-        .checkbox span.icon {
+        .checkbox1 span.icon {
             display: inline-block;
             width: 21px;
             height: 21px;
@@ -32,7 +32,7 @@
             background: url("imgs/sprite.png") 79px 22px;
         }
 
-        .checkbox input:checked + span.icon {
+        .checkbox1 input:checked + span.icon {
             background: url("imgs/sprite.png") 44px 22px;
         }
 
@@ -47,10 +47,6 @@
             margin: 0 3px;
             border: 1px solid #CCC;
             border-radius: 50%;
-            line-height: 14px;
-            font-size: 0;
-            text-align: center;
-            overflow: hidden;
         }
 
         .radio2 input:checked + span.icon {
@@ -58,13 +54,16 @@
         }
 
         .radio2 input:checked + span.icon:after {
-            display: inline-block;
+            display: block;
             content: "";
-            width: 0;
-            height: 0;
-            border: 3px solid red;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            vertical-align: middle;
+            background-color: red;
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .checkbox2 input {
@@ -77,10 +76,6 @@
             height: 12px;
             margin: 0 3px;
             border: 1px solid #CCC;
-            overflow: hidden;
-            text-align: center;
-            line-height: 12px;
-            font-size: 0;
         }
 
         .checkbox2 input:checked + span.icon {
@@ -88,44 +83,71 @@
         }
 
         .checkbox2 input:checked + span.icon:after {
-            display: inline-block;
+            display: block;
+            content: "";
             width: 3px;
             height: 5px;
             border: 2px solid red;
             border-left-width: 0;
             border-top-width: 0;
-            content: "";
-            transform: rotate(45deg);
-            vertical-align: -3px;
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: rotate(45deg) translate(-70%, -50%);
+            /*transform: ;*/
         }
 
     </style>
 </head>
 <body>
 <div>
-    <label class="radio">
-        <span class="title"></span>
-        <input type="radio">
+    <h4>使用背景图</h4>
+    <label class="radio1">
+        <span class="title">a</span>
+        <input type="radio" name="radio1">
+        <span class="icon"></span>
+    </label>
+    <label class="radio1">
+        <span class="title">b</span>
+        <input type="radio" name="radio1">
         <span class="icon"></span>
     </label>
 
-    <label class="checkbox">
-        <span class="title"></span>
-        <input type="checkbox">
+    <label class="checkbox1">
+        <span class="title">a</span>
+        <input type="checkbox" name="checkbox1">
+        <span class="icon"></span>
+    </label>
+
+    <label class="checkbox1">
+        <span class="title">b</span>
+        <input type="checkbox" name="checkbox1">
         <span class="icon"></span>
     </label>
 </div>
 
 <div>
+    <h4>使用伪元素</h4>
     <label class="radio2">
-        <span class="title"></span>
-        <input type="radio">
+        <span class="title">a</span>
+        <input type="radio" name="radio2">
+        <span class="icon"></span>
+    </label>
+
+    <label class="radio2">
+        <span class="title">b</span>
+        <input type="radio" name="radio2">
         <span class="icon"></span>
     </label>
 
     <label class="checkbox2">
-        <span class="title"></span>
-        <input type="checkbox">
+        <span class="title">a</span>
+        <input type="checkbox" name="checkbox2">
+        <span class="icon"></span>
+    </label>
+    <label class="checkbox2">
+        <span class="title">b</span>
+        <input type="checkbox" name="checkbox2">
         <span class="icon"></span>
     </label>
 </div>
