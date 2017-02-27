@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义网页右键菜单</title>
+    <style>
+        #custom-menu-area {
+            background-color: #f5f5f5;
+            padding: 100px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        #custom-menu {
+            position: absolute;
+            min-width: 250px;
+            box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        #custom-menu ul {
+            list-style: none;
+            font-size: 20px;
+            line-height: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #custom-menu ul li {
+            cursor: pointer;
+            padding: 16px 25px;
+        }
+
+        #custom-menu ul li:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div id="custom-menu-area"><h2>right click to see the menu</h2></div>
+<div id="popup">
+    <div id="custom-menu">
+        <ul>
+            <li>
+                Menu Item 1
+            </li>
+            <li>
+                Menu Item 2
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+
+  var area  = document.getElementById('custom-menu-area')
+  var popup = document.getElementById('popup')
+  var menu  = document.getElementById('custom-menu')
+
+  //  prevent the default menu showing
+  document.oncontextmenu = e => e.preventDefault()
+  area.oncontextmenu     = showCustomMenu
+  popup.oncontextmenu    = showCustomMenu
+  menu.onclick           = function (e)
+  {
+    if (e.target.tagName.toUpperCase() === "LI") {
+      var menuItem = e.target
+      setTimeout(function ()
+      {
+        alert(menuItem.innerText)
+      }, 0)
+    }
+  }
+
+  popup.onclick = function (e)
+  {
+    hidePopup()
+  }
+
+  function showCustomMenu(e)
+  {
+    showPopup()
+    resetMenu(e)
+  }
+
+  function resetMenu(e)
+  {
+    var mouseX       = e.clientX,
+        mouseY       = e.clientY,
+        menuWidth    = menu.clientWidth,
+        menuHeight   = menu.clientHeight,
+        clientWidth  = document.documentElement.clientWidth,
+        clientHeight = document.documentElement.clientHeight,
+        reactWidth   = clientWidth - mouseX,
+        reactHeight  = clientHeight - mouseY,
+        flagX        = reactWidth > menuWidth,
+        flagY        = reactHeight > menuHeight
+
+    if (flagX && flagY) {
+      //鼠标在左上角，菜单在右下角
+      setMenuPosition(mouseX, mouseY)
+    } else if (!flagX && flagY) {
+      //鼠标在右上角，菜单在左下角
+      setMenuPosition(mouseX - menuWidth, mouseY)
+
+    } else if (flagX && !flagY) {
+      //鼠标在左下角，菜单在右上角
+      setMenuPosition(mouseX, mouseY - menuHeight)
+    }
+    else {
+      //鼠标在右下角，菜单在左上角
+      setMenuPosition(mouseX - menuWidth, mouseY - menuHeight)
+    }
+    function setMenuPosition(x, y)
+    {
+      menu.style.left = x + 'px'
+      menu.style.top  = y + 'px'
+    }
+  }
+  function showPopup()
+  {
+    popup.style.display = 'block'
+  }
+  function hidePopup()
+  {
+    popup.style.display = 'none'
+  }
+</script>
+</body>
+</html>
