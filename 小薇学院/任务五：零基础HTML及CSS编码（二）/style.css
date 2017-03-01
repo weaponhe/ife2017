@@ -1,0 +1,177 @@
+/*reset*/
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #CCCCCC;
+}
+
+/*header*/
+header {
+    background-color: #333;
+    padding: 20px 20px;
+    overflow: auto;
+}
+
+h1 {
+    float: left;
+    font-size: 0;
+    margin: 0;
+}
+
+h1 img {
+    height: 25px;
+}
+
+h1 span {
+    display: none;
+}
+
+nav {
+    float: right;
+    height: 25px;
+    line-height: 25px;
+}
+
+nav ul {
+    overflow: auto;
+    margin: 0;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    color: #DDD;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    color: #FFF;
+}
+
+nav ul li + li {
+    margin-left: 2em;
+}
+
+/*main*/
+main {
+    /*width: 98%;*/
+    margin: 20px 340px 20px 20px;
+}
+
+article {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #FFF;
+    box-shadow: 2px 2px 1px 1px #999;
+}
+
+article img {
+    width: 50%;
+}
+
+article .galerry figure {
+    float: left;
+    margin: 10px;
+    border: 1px solid #000;
+    padding: 20px;
+    text-align: center
+}
+
+article .galerry figcaption {
+    margin-bottom: 20px;
+}
+
+article .galerry img {
+    max-width: 300px;
+    width: auto;
+}
+
+article .galerry::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+article:last-child table {
+    width: 100%;
+}
+
+article:last-child table thead {
+    background-color: #333;
+    color: #CCC;
+}
+
+/*aside*/
+aside {
+    float: right;
+    box-sizing: border-box;
+    width: 300px;
+    margin: 20px 20px;
+    padding: 20px;
+    background-color: #FFF;
+    box-shadow: 2px 2px 1px 1px #999;
+}
+
+aside h5 {
+    padding: 5px 10px;
+    border-left: 5px solid #ccc;
+}
+
+aside form {
+    font-size: 12px;
+}
+
+aside .input-entity {
+    margin: 1em 0;
+}
+
+aside .input-title {
+    float: left;
+    width: 35%;
+    text-align: right;
+}
+
+aside .input-entity input,
+aside .input-entity select,
+aside .input-entity textarea {
+    margin-left: 1em;
+}
+
+aside .input-hint {
+    position: relative;
+    color: #ccc;
+    left: 35%;
+    margin-left: 1em;
+    margin-top: 0.5em;
+}
+
+aside input[type=checkbox] {
+    margin-left: 0.5em;
+}
+
+aside textarea {
+    width: 50%;
+}
+
+aside input[type=submit] {
+    display: block;
+    margin: 1em 0;
+    border-style: none;
+    border-radius: 5px;
+    padding: .5em;
+    width: 100%;
+    background-color: dodgerblue;
+    color: #FFF;
+    font-size: 15px;
+}
+
+/*footer*/
+footer {
+    padding: 20px;
+    color: #CCC;
+    background-color: #000;
+    text-align: center;
+    clear: both;
+}
