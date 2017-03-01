@@ -91,8 +91,47 @@ aside h2 {
     border-left: 5px solid #ccc;
 }
 
-/*footer*/
+aside form {
+    font-size: 13px;
+}
 
+aside .input-entity {
+    margin: 1em 0;
+}
+
+aside .input-title {
+    float: left;
+    width: 30%;
+    text-align: right;
+}
+
+aside .input-entity input,
+aside .input-entity select,
+aside .input-entity textarea {
+    margin-left: 1em;
+}
+
+aside .input-hint {
+    position: relative;
+    color: #ccc;
+    left: 30%;
+    margin-left: 1em;
+    margin-top: 0.5em;
+}
+
+aside input[type=submit] {
+    display: block;
+    margin: 1em 0;
+    border-style: none;
+    border-radius: 5px;
+    padding: .5em;
+    width: 100%;
+    background-color: dodgerblue;
+    color: #FFF;
+    font-size: 15px;
+}
+
+/*footer*/
 footer {
     padding: 20px;
     color: #CCC;

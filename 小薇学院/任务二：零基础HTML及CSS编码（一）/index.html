@@ -139,32 +139,67 @@
 </main>
 <aside>
     <h2>这里以后是一个侧栏，这是侧栏的标题</h2>
-    <h3>侧栏注册窗口标题</h3>
     <form>
-        <label><span>请输入邮箱地址：</span><input type="text" placeholder="这是一个文本输入框"></label>
-        <div>邮箱地址请按要求输入</div>
-        <label><span>请输入密码：</span><input type="text" placeholder="这是一个文本输入框"></label>
-        <label><span>请重复输入密码：</span><input type="text" placeholder="这是一个文本输入框"></label>
-        <div>密码请为6-16位英文数字</div>
-        <br>
-        <span>性别：</span>
-        <label><span>男</span><input type="radio" name="xingbie" value="male"></label>
-        <label><span>女</span><input type="radio" name="xingbie" value="female"></label>
+        <div class="input-entity">
+            <label>
+                <span class="input-title input-label">请输入邮箱地址</span>
+                <input type="text" placeholder="这是一个文本输入框">
+            </label>
+            <div class="input-hint">邮箱地址请按要求输入</div>
+        </div>
+        <div class="input-entity">
+            <label>
+                <span class="input-title input-label">请输入密码</span>
+                <input type="text" placeholder="这是一个文本输入框">
+            </label>
+        </div>
+        <div class="input-entity">
+            <label>
+                <span class="input-title input-label">请重复输入密码</span>
+                <input type="text" placeholder="这是一个文本输入框">
+            </label>
+            <div class="input-hint">密码请为6-16位英文数字</div>
+        </div>
+        <div class="input-entity">
+            <span class="input-title">性别</span>
+            <label class="input-label">
+                <input type="radio" name="xingbie" value="male" checked>
+                <span class="input-label">男</span>
+            </label>
+            <label class="input-label">
+                <input type="radio" name="xingbie" value="female">
+                <span class="input-label">女</span>
+            </label>
+        </div>
 
-        <span>城市：</span>
-        <select>
-            <option value="a">a</option>
-            <option value="b">b</option>
-            <option value="c">c</option>
-            <option value="d">d</option>
-        </select>
-
-        <span>爱好：</span>
-        <label><span>运动</span><input type="checkbox" name="aihao" value="yd"></label>
-        <label><span>艺术</span><input type="checkbox" name="aihao" value="ys"></label>
-
-        <textarea cols="30" rows="2">这是一个多行输入框</textarea>
-        <input type="submit">
+        <div class="input-entity">
+            <span class="input-title">城市</span>
+            <select>
+                <option value="bj" selected>北京</option>
+                <option value="sh">上海</option>
+                <option value="gz">广州</option>
+            </select>
+        </div>
+        <div class="input-entity">
+            <span class="input-title">爱好</span>
+            <label>
+                <input type="checkbox" name="aihao" value="yd">
+                <span>运动</span>
+            </label>
+            <label>
+                <input type="checkbox" name="aihao" value="ys">
+                <span>艺术</span>
+            </label>
+            <label>
+                <input type="checkbox" name="aihao" value="kx">
+                <span>科学</span>
+            </label>
+        </div>
+        <div class="input-entity">
+            <span class="input-title">个人描述</span>
+            <textarea cols="50" rows="5">这是一个多行输入框</textarea>
+        </div>
+        <input type="submit" value="确认提交"/>
     </form>
 </aside>
 <footer>版权所有©️</footer>
