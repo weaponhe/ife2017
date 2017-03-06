@@ -1,0 +1,22 @@
+@import "common.css";
+
+.float-grid-container * {
+    box-sizing: border-box;
+}
+
+.float-grid-container {
+    width: 100%;
+}
+
+.float-grid-container .row:before,
+.float-grid-container .row:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.float-grid-container [class*="col-"] {
+    float: left;
+    padding: 12px;
+}
+

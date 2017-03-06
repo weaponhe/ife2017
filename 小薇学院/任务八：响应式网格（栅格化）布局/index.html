@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务八：响应式网格（栅格化）布局</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="float-grid.css">
+    <link rel="stylesheet" href="flex-grid.css">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .row [class*=col-] {
+            border: 1px solid lightcoral;
+        }
+    </style>
+</head>
+<body>
+<div class="float-grid-container ">
+    <div class="row">
+        <div class="col-xs-1 col-sm-2 col-md-8 col-lg-1">6</div>
+        <div class="col-xs-1 col-sm-10 col-md-4 col-lg-11">6</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-1 col-sm-2 col-md-8 col-lg-1">6</div>
+        <div class="col-xs-1 col-sm-10 col-md-4 col-lg-11">6</div>
+    </div>
+</div>
+
+<div class="flex-grid-container ">
+    <div class="row">
+        <div class="col-xs-1 col-sm-2 col-md-8 col-lg-1">6</div>
+        <div class="col-xs-1 col-sm-10 col-md-4 col-lg-11">6</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-1 col-sm-2 col-md-8 col-lg-1">6</div>
+        <div class="col-xs-1 col-sm-10 col-md-4 col-lg-11">6</div>
+    </div>
+</div>
+</body>
+</html>
