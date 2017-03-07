@@ -219,37 +219,35 @@ div.content div.wrapper > section {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
+    justify-content: flex-start;
 }
 
-/*===select-component start===*/
 .select-component {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    font-size: 14px;
 }
 
-.select-component + .select-component {
-    margin-left: 20px;
+.select-component.select-block {
+    flex-grow: 1;
 }
 
-/*===select-component end===*/
+.select-component.select-block .select {
+    flex-grow: 1;
+}
 
 .select-component label {
-    font-size: 15px;
     color: #b0b0b0;
     margin-right: 1em;
+    flex-shrink: 0;
 }
 
 .select {
-    /*display: inline-block;*/
     position: relative;
     border: 1px solid #c9c9c9;
-    padding: .2em .8em;
+    padding: .1em .8em;
     cursor: pointer;
-}
-
-.select-block {
-    flex: 1;
 }
 
 /*==select begin==*/
@@ -297,60 +295,47 @@ div.content div.wrapper > section {
     color: #CCCCCC;
 }
 
-/*==select end==*/
+.col-2 {
+    flex-basis: 20%;
+    max-width: 250px;
+}
 
-.col2 {
+.col-3 {
     display: flex;
     flex-direction: column;
-    flex-basis: 15%;
+    flex-basis: 35%;
+    max-width: 350px;
 }
 
 .col .row {
-    flex: 1 0;
-}
-
-/*=col3 start=*/
-.col3 {
-    display: flex;
-    flex-direction: column;
-}
-
-.col3 .row {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
 }
 
-.col3 .row .label {
-    display: flex;
-    flex: 1 1;
-}
-
-/*=col3 end=*/
-
-/*=col4 start=*/
-.col4 {
+.col-4 {
     display: flex;
     align-items: center;
 }
 
-.col4 a {
+.col-4 a {
     background: #3d8abe;
     padding: .3em 1em;
     color: #FFFFFF;
     cursor: pointer;
 }
 
-.col4 a:hover {
+.col-4 a:hover {
     background: blue;
     padding: .3em 1em;
     color: #FFFFFF;
 }
 
-/*=col4 end=*/
+.col + .col {
+    margin-left: 5%;
+}
 
-[class*="col"] {
-    padding: 0 20px;
+.select-component {
+    margin: 4px;
 }
 
 /*=====history=====*/
@@ -405,9 +390,6 @@ div.content div.wrapper > section {
 
 .history-box ul li {
     flex: 1;
-}
-
-.pager-next {
 }
 
 /*=====history=====*/
@@ -576,8 +558,6 @@ table.normal-table {
 .normal-table .data-label {
     color: #cdcdcd;
 }
-
-@import "panel.css";
 
 .data-row {
     display: flex;
