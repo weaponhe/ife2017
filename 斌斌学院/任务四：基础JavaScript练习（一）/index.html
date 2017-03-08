@@ -43,9 +43,9 @@
   {
     var target = e.target
     if (target.id === 'left-in') {
-      checkInput() && leftIn(checkInput())
+      checkInput() !== false && leftIn(checkInput())
     } else if (target.id === 'right-in') {
-      checkInput() && rightIn(checkInput())
+      checkInput() !== false && rightIn(checkInput())
     } else if (target.id === 'left-out') {
       checkEmptyArray() && leftOut()
     } else if (target.id === 'right-out') {
@@ -53,10 +53,22 @@
     }
   }
 
+  show_area.onclick = function (e)
+  {
+    var target = e.target
+    if (target.nodeName == 'SPAN') {
+      this.removeChild(target)
+    }
+  }
+
   function checkInput()
   {
     var value = parseFloat(input.value)
-    return !isNaN(value) && value
+    if (!isNaN(value)) {
+      return value
+    } else {
+      return false
+    }
   }
 
   function checkEmptyArray()
@@ -82,10 +94,12 @@
   function rightOut()
   {
     show_area.removeChild(show_area.lastChild)
+    alert(show_area.lastChild.innerText)
   }
   function leftOut()
   {
     show_area.removeChild(show_area.firstChild)
+    alert(show_area.lastChild.innerText)
   }
 </script>
 </body>
