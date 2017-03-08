@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务四：基础JavaScript练习（一）</title>
+    <style>
+
+        .wrapper {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        #show-area {
+            margin-top: 20px;
+            word-break: break-all;
+        }
+
+        #show-area span {
+            background: red;
+            padding: 10px 20px;
+            line-height: 60px;
+            margin: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div id="option-area">
+        <input type="number" id="input">
+        <button id="left-in">左侧入</button>
+        <button id="right-in">右侧入</button>
+        <button id="left-out">左侧出</button>
+        <button id="right-out">右侧出</button>
+    </div>
+    <div id="show-area"></div>
+</div>
+<script>
+  var input           = document.getElementById('input'),
+      option_area     = document.getElementById('option-area'),
+      show_area       = document.getElementById('show-area')
+  option_area.onclick = function (e)
+  {
+    var target = e.target
+    if (target.id === 'left-in') {
+      checkInput() && leftIn(checkInput())
+    } else if (target.id === 'right-in') {
+      checkInput() && rightIn(checkInput())
+    } else if (target.id === 'left-out') {
+      checkEmptyArray() && leftOut()
+    } else if (target.id === 'right-out') {
+      checkEmptyArray() && rightOut()
+    }
+  }
+
+  function checkInput()
+  {
+    var value = parseFloat(input.value)
+    return !isNaN(value) && value
+  }
+
+  function checkEmptyArray()
+  {
+    return !(
+    show_area.getElementsByTagName('span').length === 0)
+  }
+
+  function createItem(num)
+  {
+    var item       = document.createElement('span')
+    item.innerText = num
+    return item
+  }
+  function leftIn(num)
+  {
+    show_area.insertBefore(createItem(num), show_area.firstChild)
+  }
+  function rightIn(num)
+  {
+    show_area.appendChild(createItem(num))
+  }
+  function rightOut()
+  {
+    show_area.removeChild(show_area.lastChild)
+  }
+  function leftOut()
+  {
+    show_area.removeChild(show_area.firstChild)
+  }
+</script>
+</body>
+</html>
