@@ -1,6 +1,7 @@
 var input      = document.getElementById('input'),
     optionArea = document.getElementById('option-area'),
-    showArea   = document.getElementById('show-area')
+    showArea   = document.getElementById('show-area'),
+    sortBtn    = document.getElementById('sort')
 
 optionArea.onclick = function (e)
 {
@@ -49,6 +50,8 @@ input.onkeydown = function (e)
   }
   !valid && e.preventDefault()
 }
+
+sortBtn.onclick = sort
 
 function getEventObject(e)
 {
@@ -99,3 +102,20 @@ function rightOut()
     showArea.removeChild(showArea.lastElementChild)
   }
 }
+
+
+function sort()
+{
+  var items = showArea.children
+  var len   = items.length, i, j
+  for (i = len; i > 1; i--) {
+    for (j = 0; j < i - 1; j++) {
+      if (parseFloat(items[j].style.height) > parseFloat(items[j + 1].style.height)) {
+        var temp                  = items[j].style.height
+        items[j].style.height     = items[j + 1].style.height
+        items[j + 1].style.height = temp
+      }
+    }
+  }
+}
+
