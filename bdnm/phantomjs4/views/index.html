@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网页抓取分析服务系列之四（数据交互）</title>
+</head>
+<body>
+<form id="form">
+    <input type="text" name="keyword" placeholder="请输入关键词" autofocus>
+    <select name="user-agent">
+        <option value="ipad">ipad</option>
+        <option value="iphone5">iphone5</option>
+        <option value="iphone6">iphone6</option>
+    </select>
+    <input type="submit" name="submit" value="提交">
+</form>
+<script>
+    var form = document.getElementById('form')
+    form.addEventListener('submit', function (event) {
+        var keyword = form.elements['keyword']
+        var userAgent = form.elements['user-agent']
+        if (keyword.value.trim() === '') {
+            alert('关键词不能为空，请重新输入。')
+            keyword.value = ''
+        } else {
+            console.log('发起请求：%s %s', keyword.value, userAgent.value)
+            search(keyword.value, userAgent.value)
+        }
+        keyword.focus()
+        event.preventDefault()
+    }, false)
+
+    function search(keyword, userAgent) {
+        var res = fetch("/search?" + "keyword=" + keyword + '&userAgent=' + userAgent)
+        res.then(function (response) {
+            return response.json()
+        }).then(function (data) {
+            console.log(data)
+        }).catch(function (err) {
+            console.log(err)
+        })
+    }
+</script>
+</body>
+</html>
