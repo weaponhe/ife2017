@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="compile.js"></script>
+    <script src="Observer.js"></script>
+    <script src="Watcher.js"></script>
+    <script src="Dep.js"></script>
+    <script src="Vue.js"></script>
+</head>
+<body>
+<!-- 页面中原本的 html 模板片段 -->
+<div id="app">
+    <p>姓名：{{user.name}}</p>
+    <p>年龄：{{user.age}}</p>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            user: {
+                name: 'youngwind',
+                age: 25
+            }
+        }
+    });
+</script>
+</body>
+</html>
