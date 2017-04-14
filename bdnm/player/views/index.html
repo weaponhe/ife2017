@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        @font-face {
+            font-family: 'iconfont';  /* project id 278558 */
+            src: url('//at.alicdn.com/t/font_y8wok69736czyqfr.eot');
+            src: url('//at.alicdn.com/t/font_y8wok69736czyqfr.eot?#iefix') format('embedded-opentype'),
+            url('//at.alicdn.com/t/font_y8wok69736czyqfr.woff') format('woff'),
+            url('//at.alicdn.com/t/font_y8wok69736czyqfr.ttf') format('truetype'),
+            url('//at.alicdn.com/t/font_y8wok69736czyqfr.svg#iconfont') format('svg');
+        }
+
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="loadPlaylist" id="btn-playlist">
+<input type="button" value="loadPlayer" id="btn-player">
+<script>
+    var btnPlaylist = document.getElementById('btn-playlist'),
+        btnPlayer = document.getElementById('btn-player')
+
+    btnPlaylist.addEventListener('click', function () {
+        loadComponent('/playlists')
+    }, false)
+    btnPlayer.addEventListener('click', function () {
+        loadComponent('/player')
+    }, false)
+    btnPlayer.click()
+    btnPlaylist.click()
+    function loadComponent(url) {
+        fetch(url, function (err, res) {
+            if (err) {
+                throw err
+            }
+            res = JSON.parse(res)
+            var html = document.createElement('div'),
+                style = document.createElement('style'),
+                script = document.createElement('script')
+            html.innerHTML = res.html
+            style.innerHTML = res.css
+            script.text = res.script
+            document.body.appendChild(html)
+            document.head.appendChild(style)
+            document.body.appendChild(script)
+        })
+    }
+    function fetch(url, callback) {
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if ((xhr.status >= 200 && xhr.status < 300 ) || xhr.status === 304) {
+                    callback(null, xhr.responseText)
+                } else {
+                    callback(new Error('Request unsuccessful: ' + xhr.status + ' ' + xhr.statusText))
+                }
+            }
+        }
+        xhr.open('get', url, true)
+        xhr.send(null)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+#player {
+    position: fixed;
+    z-index: 1000;
+    width: 250px;
+    height: 50px;
+    background: #000000;
+    left: 0;
+    bottom: 50px;
+}
+

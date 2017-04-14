@@ -1,0 +1,78 @@
+
+#playlists {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+#playlists .item {
+    flex: 0 0 150px;
+    margin: 15px 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+#playlists .item img {
+    display: block;
+    width: 100%;
+}
+
+#playlists .item h4 {
+    margin: 0;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: -50%;
+    left: 0;
+    right: 0;
+    transition: bottom 0.3s;
+}
+
+#playlists .item:hover h4 {
+    top: auto;
+    bottom: 0;
+}
+
+#playlists .item span {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: background 0.3s;
+    font-size: 14px;
+}
+
+#playlists .item:hover span {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#playlists .item:after {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #eee;
+    visibility: hidden;
+    content: attr(data-start);
+}
+
+#playlists .item:hover:after {
+    visibility: visible;
+}
+
+#playlists .item.playing:after {
+    content: attr(data-pause);
+    visibility: visible;
+}
