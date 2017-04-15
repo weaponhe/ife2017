@@ -1,40 +1,5 @@
-var state = {
-    _playlist: undefined,
-    _playing: false
-}
-Object.defineProperty(state, 'playlist', {
-    set: function (newVal) {
-        if (state._playlist === undefined) {
-            state._playlist = newVal
-            state.playing = true
-        } else if (state._playlist !== newVal) {
-            state._playlist = newVal
-            state.playing = true
-        } else {
-            state.playing = !state.playing
-        }
-    },
-    get: function () {
-        return state._playlist
-    }
-})
-Object.defineProperty(state, 'playing', {
-    set: function (newVal) {
-        for (var i = 0, len = playlistSet.length; i < len; i++) {
-            playlistSet[i].classList.remove('playing')
-        }
-        if (newVal) {
-            document.getElementById(state.playlist).classList.add('playing')
-        }
-        state._playing = newVal
-    },
-    get: function () {
-        return state._playing
-    }
-})
-
 var playlists = document.getElementById('playlists')
-var playlistSet = playlists.children
+
 fetch('/api/playlists', function (err, res) {
     res = JSON.parse(res)
     var template = playlists.firstElementChild.cloneNode(true)
@@ -49,6 +14,49 @@ fetch('/api/playlists', function (err, res) {
         title.innerText = res[i].name
         count.innerText = res[i].trackCount
         playlists.appendChild(item)
+
+        data[item.id] = res[i]
+    }
+    if (!state.playlist) {
+        lazyLoadPlaylist(res[0].id, function (err, playlist) {
+            state.playlist = playlist.id
+            state.song = 0
+        })
+    }
+})
+
+stateEvent.on('playlistChange', function (newId, oldId) {
+    if (oldId) {
+        var oldItem = document.getElementById(oldId)
+        oldItem.classList.remove('playing')
+    }
+    if (state.playing) {
+        var newItem = document.getElementById(newId)
+        newItem.classList.add('playing')
+    }
+})
+stateEvent.on('playlistChange', function (newId, oldId) {
+    if (oldId && newId && newId !== oldId) {
+        lazyLoadPlaylist(newId, function (err, playlist) {
+            state.song = 0
+            var track = playlist.tracks[state.song]
+            songImg.src = track.picUrl
+            songName.innerText = track.name
+            artist.innerText = track.artist
+            audio.src = track.mp3Url
+        })
+    }
+})
+
+
+stateEvent.on('playingChange', function (newVal) {
+    if (state.playlist) {
+        var playingItem = document.getElementById(state.playlist)
+        if (newVal) {
+            playingItem.classList.add('playing')
+        } else {
+            playingItem.classList.remove('playing')
+        }
     }
 })
 
@@ -61,6 +69,27 @@ playlists.addEventListener('click', function (event) {
         target = target.parentNode
     }
     if (target) {
-        state.playlist = target.id
+        if (target.id === state.playlist) {
+            state.playing = !state.playing
+        } else {
+            state.playing = true
+            state.playlist = target.id
+        }
     }
-}, false)
+})
+
+
+function lazyLoadPlaylist(id, cb) {
+    if (data[id].tracks) {
+        cb(null, data[id])
+    }
+    else {
+        fetch('/api/playlists/' + id, function (err, playlist) {
+            if (err)
+                cb(err)
+            playlist = JSON.parse(playlist)
+            data[id] = playlist
+            cb(null, data[id])
+        })
+    }
+}

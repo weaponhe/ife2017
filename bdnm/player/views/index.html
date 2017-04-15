@@ -24,20 +24,78 @@
     </style>
 </head>
 <body>
-<input type="button" value="loadPlaylist" id="btn-playlist">
-<input type="button" value="loadPlayer" id="btn-player">
 <script>
-    var btnPlaylist = document.getElementById('btn-playlist'),
-        btnPlayer = document.getElementById('btn-player')
+    (function () {
+        function EventEmitter() {
+            this.map = {}
+        }
 
-    btnPlaylist.addEventListener('click', function () {
-        loadComponent('/playlists')
-    }, false)
-    btnPlayer.addEventListener('click', function () {
-        loadComponent('/player')
-    }, false)
-    btnPlayer.click()
-    btnPlaylist.click()
+        EventEmitter.prototype.on = function (type, handler) {
+            if (this.map[type] === undefined) {
+                this.map[type] = []
+            }
+            this.map[type].push(handler)
+            return this
+        }
+
+        EventEmitter.prototype.off = function (type, handler) {
+            if (this.map[type] === undefined)return false
+            for (var i = 0; i < this.map[type].length; i++) {
+                if (this.map[type][i] === handler) {
+                    this.map[type].splice(i, 1)
+                    return true
+                }
+            }
+            return false
+        }
+
+        EventEmitter.prototype.emit = function (type) {
+            if (this.map[type] === undefined || this.map[type].length === 0)return false
+            for (var i = 0; i < this.map[type].length; i++) {
+                this.map[type][i].apply(null, Array.prototype.slice.call(arguments, 1))
+            }
+            return true
+        }
+
+        var moduleName = EventEmitter
+        if (typeof module !== 'undefined' && typeof exports === 'object') {
+            module.exports = moduleName
+        } else if (typeof define === 'function' && (define.amd || define.cmd)) {
+            define(function () {
+                return moduleName
+            })
+        } else {
+            this[moduleName.name] = moduleName
+        }
+    }).call(function () {
+        return this || (typeof window !== 'undefined' ? window : global)
+    }())
+
+    var stateEvent = new EventEmitter()
+    var state = {
+        _playlist: localStorage.getItem('_playlist'),
+        _song: localStorage.getItem('_song'),
+        _playing: localStorage.getItem('_playing'),
+        _muted: localStorage.getItem('_playing'),
+        _mode: 0
+    }
+    for (var key in state) {
+        Object.defineProperty(state, key.substring(1), {
+            get: (function (key) {
+                return function () {
+                    return state[key]
+                }
+            })(key),
+            set: (function (key) {
+                return function (newVal) {
+                    if (newVal === state[key])return
+                    stateEvent.emit(key.substring(1) + 'Change', newVal, state[key])
+                    state[key] = newVal
+                }
+            })(key)
+        })
+    }
+    var data = {}
     function loadComponent(url) {
         fetch(url, function (err, res) {
             if (err) {
@@ -69,6 +127,8 @@
         xhr.open('get', url, true)
         xhr.send(null)
     }
+    loadComponent('/playlists')
+    loadComponent('/player')
 </script>
 </body>
 </html>

@@ -13,7 +13,6 @@ function request(id) {
             });
             res.on('end', () => {
                 let obj = JSON.parse(data)
-                // console.log(obj)
                 result.id = obj.result.id
                 result.name = obj.result.name
                 result.coverImgUrl = obj.result.coverImgUrl
@@ -21,9 +20,11 @@ function request(id) {
 
                 result.tracks = obj.result.tracks.map(track => {
                     return {
+                        id: track.id,
                         name: track.name,
-                        mp3: track.mp3Url,
-                        artists: track.artists[0].name,
+                        mp3Url: track.mp3Url,
+                        picUrl: track.album.picUrl,
+                        artist: track.artists[0].name,
                     }
                 })
                 resolve(result)
@@ -36,17 +37,17 @@ function request(id) {
     })
 }
 
-let datalist = null
+let datalist = [], datamap = {}
 async function crawl() {
-    if (datalist)
-        return datalist
-
-    datalist = []
+    if (datalist.length) {
+        return {datalist, datamap}
+    }
     await Promise.all(playlists.map(async id => {
         let playlist = await request(id)
         datalist.push(playlist)
+        datamap[playlist.id] = playlist
     }))
-    return datalist
+    return {datalist, datamap}
 }
 
 

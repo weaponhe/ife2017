@@ -3,8 +3,130 @@
     z-index: 1000;
     width: 250px;
     height: 50px;
-    background: #000000;
     left: 0;
     bottom: 50px;
+    border: 1px solid #ccc;
+    user-select: none;
 }
 
+#player .cover {
+    position: absolute;
+    width: 50px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+#player .cover img {
+    width: 100%;
+    height: 100%;
+}
+
+#player .cover .play {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+}
+
+#player .cover:hover .play {
+    visibility: visible;
+}
+
+#player .cover .play i {
+    color: #cccccc;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+#player .panel {
+    position: absolute;
+    left: 50px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 5px;
+}
+
+#player .panel .info {
+    box-sizing: border-box;
+    height: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#player .panel .info .name {
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 60%;
+    font-size: 14px;
+}
+
+#player .panel .info .singer {
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 40%;
+    font-size: 12px;
+    color: #666;
+    padding: 5px;
+}
+
+#player .panel .option {
+    height: 40%;
+    font-size: 0;
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+}
+
+#player .panel .option .progress {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: 60%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.back-bar, .played-bar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 3px;
+    border-radius: 1.5px;
+}
+
+.back-bar {
+    width: 100%;
+    background-color: #DDDDDD;
+}
+
+#player .played-bar {
+    width: 0;
+    background-color: #4fc08d;
+}
+
+#player .iconfont {
+    cursor: pointer;
+}
+
+.volume, .mode {
+    color: #cccccc;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.volume:hover, .mode:hover {
+    color: #999;
+}

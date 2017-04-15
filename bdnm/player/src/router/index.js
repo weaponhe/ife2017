@@ -22,13 +22,25 @@ router.get('/player', async(ctx, next) => {
 });
 
 //api
+let cache = {}
 router.get('/api/playlists', async(ctx, next) => {
-    var playlists = await crawl()
     ctx.response.set('Content-Type', 'application/json')
-    ctx.response.body = playlists.map(playlist => {
-        let {id, name, coverImgUrl, trackCount} = playlist
+    if (cache['/api/playlists']) {
+        ctx.response.body = cache['/api/playlists']
+        return
+    }
+    let {datalist} = await crawl()
+    cache['/api/playlists'] = datalist.map(item => {
+        let {id, name, coverImgUrl, trackCount} = item
         return {id, name, coverImgUrl, trackCount}
     })
+    ctx.response.body = cache['/api/playlists']
+});
+
+router.get('/api/playlists/:id', async(ctx, next) => {
+    let {datamap} = await crawl()
+    ctx.response.set('Content-Type', 'application/json')
+    ctx.response.body = datamap[ctx.params.id]
 });
 
 module.exports = router
