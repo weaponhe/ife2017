@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinite Scoll</title>
+</head>
+<body>
+<ul>
+</ul>
+<script>
+    var generate = ItemGenerator()
+    var parent = document.getElementsByTagName('ul')[0]
+    var loading = document.createElement('div')
+    loading.innerText = 'loading...'
+    window.onload = function () {
+        generate(parent, 50)
+    }
+
+    window.onscroll = function (ev) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            parent.appendChild(loading)
+            setTimeout(function () {
+                parent.removeChild(parent.lastChild)
+                generate(parent, 10)
+            }, 2000)
+        }
+    };
+
+    function ItemGenerator() {
+        var index = 0
+        return function (parent, num) {
+            for (var i = 0; i < num; i++) {
+                var child = document.createElement('li')
+                child.innerText = index++
+                parent.appendChild(child)
+            }
+        }
+    }
+</script>
+</body>
+
+</html>
