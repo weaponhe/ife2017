@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D 轮播图</title>
+    <style>
+
+        @keyframes spin {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .stage {
+            height: 100%;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -160px;
+            transform-style: preserve-3d;
+            transform: translateZ(-100px);
+            animation: spin 10s linear infinite;
+        }
+
+        img {
+            position: absolute;
+            margin-left: -125px;
+            width: 250px;
+            height: 320px;
+        }
+
+        .i1 {
+            transform: translateZ(300px);
+        }
+
+        .i2 {
+            transform: rotateY(60deg) translateZ(300px);
+        }
+
+        .i3 {
+            transform: rotateY(120deg) translateZ(300px);
+        }
+
+        .i4 {
+            transform: rotateY(180deg) translateZ(300px);
+        }
+
+        .i5 {
+            transform: rotateY(240deg) translateZ(300px);
+        }
+
+        .i6 {
+            transform: rotateY(300deg) translateZ(300px);
+        }
+    </style>
+</head>
+<body>
+<div class="stage">
+    <div class="wrapper">
+        <img class="i1" src="1.jpg">
+        <img class="i2" src="1.jpg">
+        <img class="i3" src="1.jpg">
+        <img class="i4" src="1.jpg">
+        <img class="i5" src="1.jpg">
+        <img class="i6" src="1.jpg">
+    </div>
+</div>
+</body>
+</html>
